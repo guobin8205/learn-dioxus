@@ -1,0 +1,22 @@
+[package]
+name = "my_first_app"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+dioxus = { version = "0.7", features = ["web"] }
+
+# ⭐ Dioxus 0.7 的多端切换：通过 features 控制
+#   features = ["web"]       → 编译成 WebAssembly，跑在浏览器
+#   features = ["desktop"]   → 编译成桌面应用（用系统 WebView）
+#   features = ["mobile"]    → 编译成移动应用（实验性）
+#
+# 也可以用 dx serve --platform xxx 命令切换，dx 会自动处理 feature
+
+# 平台特定的依赖（dx serve --platform desktop 时自动启用）
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+# 桌面/移动端用的依赖放这里
+
+# 定义可选 feature，方便切换平台
+[features]
+default = []

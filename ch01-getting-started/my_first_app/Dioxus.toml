@@ -1,0 +1,14 @@
+[application]
+name = "My First Dioxus App"
+default_platform = "web"
+asset_dir = "assets"
+
+[web.app]
+title = "My First Dioxus App"
+
+[web.watcher]
+reload_html = true
+watch_path = ["src", "assets"]
+
+[web.resource.dev]
+style = ["assets/main.css"]
