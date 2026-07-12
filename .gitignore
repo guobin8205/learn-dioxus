@@ -1,0 +1,22 @@
+/target/
+**/target/
+/dist/
+**/dist/
+
+# Dioxus 构建产物
+.dioxus/
+
+# Node
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 二进制
+*.pdb
+*.exe
