@@ -32,7 +32,7 @@ fn App() -> Element {
     rsx! {
         div {
             class: "app {theme_class}",
-            style: "background: {bg_color}; color: {text_color}; min-height: 100vh;",
+            style: "background: {bg_color}; color: {text_color}; min-height: 100vh; font-family: sans-serif;",
 
             h1 { "🎨 样式与资源" }
 
@@ -121,13 +121,17 @@ fn App() -> Element {
             // ========================================================
             div { class: "card",
                 h2 { "6. 响应式布局" }
-                div { class: "grid-3",
-                    div { class: "grid-item", "项目 1" }
-                    div { class: "grid-item", "项目 2" }
-                    div { class: "grid-item", "项目 3" }
-                    div { class: "grid-item", "项目 4" }
-                    div { class: "grid-item", "项目 5" }
-                    div { class: "grid-item", "项目 6" }
+                p { class: "hint", "缩窄窗口看变化（宽屏 3 列，窄屏 1 列）" }
+
+                // 用 inline style 保证 Grid 一定生效（排查 CSS 加载问题）
+                div {
+                    style: "display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;",
+                    div { style: "background: #f0f7ff; border-radius: 6px; padding: 16px; text-align: center;", "项目 1" }
+                    div { style: "background: #f0f7ff; border-radius: 6px; padding: 16px; text-align: center;", "项目 2" }
+                    div { style: "background: #f0f7ff; border-radius: 6px; padding: 16px; text-align: center;", "项目 3" }
+                    div { style: "background: #f0f7ff; border-radius: 6px; padding: 16px; text-align: center;", "项目 4" }
+                    div { style: "background: #f0f7ff; border-radius: 6px; padding: 16px; text-align: center;", "项目 5" }
+                    div { style: "background: #f0f7ff; border-radius: 6px; padding: 16px; text-align: center;", "项目 6" }
                 }
             }
         }
