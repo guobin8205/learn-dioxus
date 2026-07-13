@@ -1,0 +1,14 @@
+[application]
+name = "Hooks Demo"
+default_platform = "web"
+asset_dir = "assets"
+
+[web.app]
+title = "Hooks 状态管理"
+
+[web.watcher]
+reload_html = true
+watch_path = ["src", "assets"]
+
+[web.resource.dev]
+style = ["assets/main.css"]
