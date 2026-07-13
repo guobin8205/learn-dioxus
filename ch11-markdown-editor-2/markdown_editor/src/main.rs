@@ -65,18 +65,21 @@ fn App() -> Element {
     let mut dark_mode = use_signal(|| false);
     let mut show_saved = use_signal(|| false);
 
-    // ⭐ use_effect：Web 模式启动时从 localStorage 恢复
+    // ⭐ use_effect：Web 模式启动时从 localStorage 恢复（异步）
     use_effect(move || {
         #[cfg(target_arch = "wasm32")]
         {
-            let js = format!("localStorage.getItem('{}')", STORAGE_KEY);
-            if let Ok(result) = dioxus::document::eval(&js).join() {
-                if let Some(saved) = result.as_string() {
-                    if !saved.is_empty() {
-                        content.set(saved);
+            spawn(async move {
+                let js = format!("localStorage.getItem('{}')", STORAGE_KEY);
+                let eval = dioxus::document::eval(&js);
+                if let Ok(result) = eval.join().await {
+                    if let Some(saved) = result.as_string() {
+                        if !saved.is_empty() {
+                            content.set(saved);
+                        }
                     }
                 }
-            }
+            });
         }
     });
 
