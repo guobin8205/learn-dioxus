@@ -1,0 +1,10 @@
+[package]
+name = "styling"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+dioxus = { version = "0.7", features = ["web"] }
+# ⭐ manganis：Dioxus 0.7 的资源处理库
+# 用于在 Rust 代码里引用 CSS、图片、字体等资源
+manganis = "0.7"

@@ -1,0 +1,62 @@
+/* ===== 第 8 章：样式与资源 ===== */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+    line-height: 1.6;
+}
+
+.app { padding: 20px; max-width: 800px; margin: 0 auto; transition: background 0.3s, color 0.3s; }
+.app.dark { background: #1a1a2e; color: #e0e0e0; }
+.app.light { background: #fafafa; color: #333; }
+
+h1 { color: #b7410e; margin-bottom: 20px; }
+h2 { font-size: 18px; margin-bottom: 12px; color: inherit; }
+
+/* 卡片 */
+.card {
+    background: inherit; border: 1px solid #ddd; border-radius: 8px;
+    padding: 20px; margin: 15px 0;
+}
+.dark .card { border-color: #444; background: #16213e; }
+
+/* 文本样式类 */
+.highlight { background: #fff3cd; padding: 8px 12px; border-radius: 4px; display: inline-block; margin: 4px 0; }
+.muted { color: #888; font-size: 14px; margin: 4px 0; }
+.hint { color: #888; font-size: 13px; margin: 4px 0; }
+
+/* 标签 */
+.badge {
+    display: inline-block; padding: 4px 12px; border-radius: 12px;
+    font-size: 13px; font-weight: bold; margin: 4px 4px 4px 0;
+}
+.badge.success { background: #d4edda; color: #155724; }
+.badge.warning { background: #fff3cd; color: #856404; }
+.badge.error { background: #f8d7da; color: #721c24; }
+
+/* 按钮 */
+.button-group { display: flex; gap: 8px; margin-top: 8px; }
+
+button, .btn {
+    padding: 8px 16px; border: none; border-radius: 4px;
+    background: #b7410e; color: white; cursor: pointer; font-size: 14px;
+}
+button:hover, .btn:hover { background: #a03a0d; }
+
+/* 条件 class 演示 */
+.box { padding: 16px; border: 2px solid #ddd; border-radius: 8px; transition: all 0.3s; }
+.box.active { border-color: #2ecc71; background: #d4edda; font-weight: bold; }
+
+/* Grid 布局 */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.grid-item {
+    background: #f0f7ff; border-radius: 6px; padding: 16px; text-align: center;
+    border: 1px solid #b8daff;
+}
+.dark .grid-item { background: #2c3e50; border-color: #34495e; }
+
+/* 响应式：窄屏改成一列 */
+@media (max-width: 500px) {
+    .grid-3 { grid-template-columns: 1fr; }
+}
