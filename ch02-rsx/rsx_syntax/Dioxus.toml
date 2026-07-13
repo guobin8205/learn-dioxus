@@ -1,0 +1,14 @@
+[application]
+name = "RSX Syntax Demo"
+default_platform = "web"
+asset_dir = "assets"
+
+[web.app]
+title = "RSX 语法演示"
+
+[web.watcher]
+reload_html = true
+watch_path = ["src", "assets"]
+
+[web.resource.dev]
+style = ["assets/main.css"]

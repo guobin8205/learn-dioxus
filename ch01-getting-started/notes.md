@@ -189,6 +189,40 @@ dx serve --platform desktop
 
 ---
 
+### Q2：用 `cargo run` 运行报错 panic（exit code 101）？
+
+**A：** Dioxus 项目**不能用 `cargo run` 运行**，必须用 `dx serve`。
+
+#### 原因
+```
+cargo run          → 编译成 Windows 原生 .exe
+features = ["web"] → 代码以为自己是 Web 渲染器
+                   → 在原生 .exe 里启动 web 渲染器 → panic
+```
+
+`cargo run` 和 Cargo.toml 里硬编码的 `features = ["web"]` 冲突——一个说要原生二进制，一个说自己是 Web 应用。
+
+#### 正确做法
+```bash
+# Web 模式
+dx serve --platform web
+
+# 桌面模式
+dx serve --platform desktop
+```
+
+#### 为什么 cargo run 不行？
+| | `cargo run` | `dx serve` |
+|---|------------|-----------|
+| 编译目标 | 当前平台原生二进制 | 根据 `--platform` 切换 |
+| feature | 用 Cargo.toml 硬编码的 | 自动切换 web/desktop |
+| WASM | ❌ | ✅ |
+| 热重载 | ❌ | ✅ |
+
+> 💡 记住：**Dioxus 项目永远用 `dx serve` 运行**。`dx` 是 Dioxus 专用的构建工具，它会正确处理平台切换、WASM 编译、资源打包。
+
+---
+
 ## ✅ 第 1 章 小结
 
 学完本章你应该掌握：
