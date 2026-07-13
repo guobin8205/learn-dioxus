@@ -1,0 +1,8 @@
+[package]
+name = "markdown_editor"
+version = "0.2.0"
+edition = "2024"
+
+[dependencies]
+dioxus = { version = "0.7", features = ["web"] }
+pulldown-cmark = "0.12"

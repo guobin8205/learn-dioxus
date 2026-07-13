@@ -1,0 +1,14 @@
+[application]
+name = "Markdown Editor"
+default_platform = "web"
+asset_dir = "assets"
+
+[web.app]
+title = "Markdown 编辑器 Pro"
+
+[web.watcher]
+reload_html = true
+watch_path = ["src", "assets"]
+
+[web.resource.dev]
+style = ["assets/main.css"]
