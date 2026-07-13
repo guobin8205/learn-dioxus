@@ -25,6 +25,7 @@ fn render_markdown(markdown: &str) -> String {
 // ========================================================
 // ⭐ 本地存储（Web 用 localStorage，桌面用文件）
 // ========================================================
+#[allow(dead_code)]  // wasm32 模式下会用到（cfg 条件编译）
 const STORAGE_KEY: &str = "markdown_editor_content";
 
 fn save_to_storage(content: &str) {

@@ -3,6 +3,11 @@ name = "Markdown Editor"
 default_platform = "web"
 asset_dir = "assets"
 
+# ⭐ bundle：打包配置（桌面应用需要 identifier）
+[bundle]
+identifier = "com.guobin.markdown-editor"
+publisher = "guobin"
+
 [web.app]
 title = "Markdown 编辑器 Pro"
 
