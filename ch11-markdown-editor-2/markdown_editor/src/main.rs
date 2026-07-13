@@ -72,10 +72,11 @@ fn App() -> Element {
             spawn(async move {
                 let js = format!("localStorage.getItem('{}')", STORAGE_KEY);
                 let eval = dioxus::document::eval(&js);
-                if let Ok(result) = eval.join().await {
-                    if let Some(saved) = result.as_string() {
+                // ⭐ join 需要指定返回类型（serde_json::Value 接收任意 JS 值）
+                if let Ok(result) = eval.join::<serde_json::Value>().await {
+                    if let Some(saved) = result.as_str() {
                         if !saved.is_empty() {
-                            content.set(saved);
+                            content.set(saved.to_string());
                         }
                     }
                 }
