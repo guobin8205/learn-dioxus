@@ -253,6 +253,40 @@ let count = signal();               // i32
 
 ---
 
+### Q3：运行时 panic "The hook list is already borrowed"？
+
+**A：** 这是因为**在 hook 里嵌套调用 hook**，违反了 Hooks 规则。
+
+#### 错误代码
+```rust
+// ❌ use_signal 在 use_context_provider 的闭包里（嵌套）
+use_context_provider(|| {
+    let cart_count = use_signal(|| 0);    // ← 违反规则！
+    AppState { cart_count }
+});
+```
+
+#### 正确代码
+```rust
+// ✅ 用 Signal::new 代替（不是 hook，可以在闭包里用）
+use_context_provider(|| AppState {
+    cart_count: Signal::new(0),           // ✅ 直接创建
+    user_name: Signal::new("访客".to_string()),
+});
+```
+
+#### 原理
+- `use_signal` / `use_context` 等是 **Hook**，必须直接在组件函数体顶层调用
+- `Signal::new` 是**普通函数**，可以在任何地方调用（包括闭包内）
+- 两者都能创建 Signal，但 `use_signal` 额外注册到组件的 hook 列表（用于响应式更新）
+
+#### Hooks 规则（和 React 一样）
+1. **只能在组件顶层直接调用**，不能嵌套在闭包里
+2. **不能在 if/for 里**（必须每次渲染按相同顺序）
+3. 违反会运行时 panic：`hook list is already borrowed`
+
+---
+
 ## ✅ 第 6 章 小结
 
 学完本章你应该掌握：

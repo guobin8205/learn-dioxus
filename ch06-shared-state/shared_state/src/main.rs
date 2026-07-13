@@ -35,11 +35,12 @@ struct AppState {
 #[component]
 fn App() -> Element {
     // ⭐ 在根组件提供状态
-    use_context_provider(|| {
-        let cart_count = use_signal(|| 0);
-        let user_name = use_signal(|| "访客".to_string());
-        let theme = use_signal(|| "light".to_string());
-        AppState { cart_count, user_name, theme }
+    // 注意：不能在 use_context_provider 的闭包里调用 use_signal（违反 Hooks 规则）
+    // 用 Signal::new 创建（等价于 use_signal）
+    use_context_provider(|| AppState {
+        cart_count: Signal::new(0),
+        user_name: Signal::new("访客".to_string()),
+        theme: Signal::new("light".to_string()),
     });
 
     rsx! {
