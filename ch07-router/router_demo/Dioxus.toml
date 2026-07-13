@@ -1,0 +1,14 @@
+[application]
+name = "Router Demo"
+default_platform = "web"
+asset_dir = "assets"
+
+[web.app]
+title = "路由导航"
+
+[web.watcher]
+reload_html = true
+watch_path = ["src", "assets"]
+
+[web.resource.dev]
+style = ["assets/main.css"]
