@@ -1,0 +1,16 @@
+[package]
+name = "platform_demo"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+dioxus = { version = "0.7", features = ["web"] }
+
+# ⭐ 平台特定依赖：
+# 桌面端独有依赖（非 wasm32 时启用）
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+# 例如：文件系统、系统调用等桌面端 API
+
+# Web 端独有依赖（wasm32 时启用）
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+# 例如：web-sys（浏览器 API）
